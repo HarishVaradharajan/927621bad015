@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Average Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Average Calculator</h1>
+        <label for="numberType">Select number type:</label>
+        <select id="numberType">
+            <option value="p">Prime</option>
+            <option value="f">Fibonacci</option>
+            <option value="e">Even</option>
+            <option value="r">Random</option>
+        </select>
+        <button id="fetchNumbers">Fetch Numbers</button>
+
+        <h2>Results</h2>
+        <pre id="result"></pre>
+    </div>
+
+    <script>
+        document.getElementById('fetchNumbers').addEventListener('click', async () => {
+            const numberType = document.getElementById('numberType').value;
+            const response = await fetch(`http://localhost:9876/numbers/${numberType}`);
+            const result = await response.json();
+            document.getElementById('result').innerText = JSON.stringify(result, null, 2);
+        });
+    </script>
+</body>
+</html>
